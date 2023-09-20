@@ -3,20 +3,26 @@
 #include <errno.h>
 #include <unistd.h>
 #include <string.h>
-#define BUFFSIZE 102400
-
+#define BUFFSIZE 1000000
 
 /**
- * main - reading from files
+ * main - write the contents of a file to stdout
+ * @argc: cli args counter
+ * @argv: filename
  *
- * Return: 0
+ * Return: 0 on success, non-zero otherwise.
  */
-int main(void)
+int main(int argc, char *argv[])
 {
 	int fd;
 	char buff[BUFFSIZE];
 
-	fd = open("README.md", O_RDONLY);
+	if (argc != 2)
+	{
+		fprintf(stderr, "Usage: %s filename\n", argv[0]);
+		return (1);
+	}
+	fd = open(argv[1], O_RDONLY);
 
 	if (fd == -1)
 	{
@@ -25,8 +31,10 @@ int main(void)
 	}
 
 	while (read(fd, buff, BUFFSIZE))
-		;
-	printf("%s", buff);
+	{
+		buff[BUFFSIZE] = '\0';
+		printf("%s\n", buff);
+	}
 
 	close(fd);
 	return (0);
