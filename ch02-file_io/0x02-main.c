@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 
 	if (fd == -1)
 	{
-		perror("open");
+		perror("mkfile");
 		return (1);
 	}
 	printf("Success: File creation successful\n");
