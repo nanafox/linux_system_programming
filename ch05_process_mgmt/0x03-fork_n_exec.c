@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 
 		if (retval == -1)
 		{
-			perror("run");
+			perror("execve");
 			return (-1); /* an error occured while trying to execute the program */
 		}
 	}
